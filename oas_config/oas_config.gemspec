@@ -28,4 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency "activesupport"
   s.add_dependency "activemodel"
   s.add_dependency "oj"
+  s.add_dependency "redis-rails"
+  s.add_dependency "rufus-scheduler"
 end
