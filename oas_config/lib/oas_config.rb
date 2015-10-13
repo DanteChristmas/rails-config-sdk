@@ -25,6 +25,7 @@ module OasConfig
 
   class Configuration
     attr_accessor :endpoint_url,
+                  :gulp_config_path,
                   :log_requests,
                   :timeout,
                   :authorization_header,

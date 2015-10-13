@@ -64,6 +64,7 @@ module OasConfig
       params[:force] = options[:force] if options[:force]
       params[:include_assets] = options[:include_assets] if options[:include_assets]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
+      params[:include_gulp_config] = options[:include_gulp_config] if options[:include_gulp_config]
 
       params
     end

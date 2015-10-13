@@ -36,5 +36,17 @@ module OasConfig
     def self.url_encode(uri)
       URI.encode(uri)
     end
+
+    def self.write_json(data, file_path, file_name)
+      Dir.mkdir file_path unless Dir.exist? file_path
+      file = "#{file_path}/#{file_name}"
+
+      scheduler = Rufus::Scheduler.new
+      scheduler.schedule_in('0s') do
+        File.open(file, "w") do |f|
+          f.write(data)
+        end
+      end
+    end
   end
 end
