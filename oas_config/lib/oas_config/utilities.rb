@@ -15,7 +15,7 @@ module OasConfig
 
       params.merge!(clazz.default_url_params) if clazz
 
-      Faraday.new config[:endpoint_url], params: params do |faraday|
+      Faraday.new config.endpoint_url, params: params do |faraday|
         faraday.headers['Authorization'] = config.authorization_header if config.authorization_header
         faraday.headers['Content-Type'] = 'application/json'
         faraday.headers['Accept-Encoding'] = 'compress'
