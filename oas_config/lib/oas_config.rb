@@ -6,9 +6,12 @@ require 'active_support/hash_with_indifferent_access'
 require "forwardable"
 
 require "oas_config/version"
-require "amp/utilities"
-require "amp/validations"
-require "amp/middleware/parse_json"
+require "oas_config/utilities"
+require "oas_config/validations"
+require "oas_config/middleware"
+require "oas_config/collections"
+require "oas_config/base_model"
+require "oas_config/account"
 
 module OasConfig
   class << self
