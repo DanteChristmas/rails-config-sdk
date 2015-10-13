@@ -26,7 +26,3 @@ module OasConfig
                   :timeout
   end
 end
-
-###
-# TODO: Initial call to grab account object goes here.
-###
