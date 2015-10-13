@@ -28,6 +28,14 @@ module OasConfig
                   :log_requests,
                   :timeout,
                   :authorization_header,
-                  :faraday_middleware
+                  :faraday_middleware,
+                  :organization_code,
+                  :cache_config
+
+    def initialize
+      @cache_config={
+        account: 1.years
+      }
+    end
   end
 end

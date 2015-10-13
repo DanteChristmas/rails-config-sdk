@@ -24,31 +24,61 @@ module OasConfig
     end
 
     def self.find(id, options={})
-      config = OasConfig.configuration
-      connection = OasConfig::Utilities.api_connection(config, my_class)
+      params = self.options_to_params options
+      Rails.cache.fetch self.cache_key(params, id), expires_in: self.cache_time(params), force: params[:force] do
+        config = OasConfig.configuration
+        connection = OasConfig::Utilities.api_connection(config, my_class)
 
-      url = Utilities.url_encode "#{base_path}#{id}"
+        url = Utilities.url_encode "#{base_path}#{id}"
 
-      response = connection.get url, options
+        response = connection.get url, params
 
-      instance = my_class.new
-      instance.run_callbacks :fetch do
-        instance.update_from_response(response)
+        instance = my_class.new
+        instance.run_callbacks :fetch do
+          instance.update_from_response(response)
+        end
+        instance
       end
-      instance
     end
 
     def self.all(options={}, &block)
-      config = OasConfig.configuration
-      connection = OasConfig::Utilities.api_connection(config, my_class)
+      params = self.options_to_params options
+      Rails.cache.fetch self.cache_key(params), expires_in: self.cache_time(params), force: params[:force] do
+        config = OasConfig.configuration
+        connection = OasConfig::Utilities.api_connection(config, my_class)
 
-      response = connection.get base_path, options
+        response = connection.get base_path, params
 
-      collection = OasConfig::Collection.from_response my_class, response
-      collection.each do |model|
-        model.run_callbacks :fetch
+        collection = OasConfig::Collection.from_response my_class, response
+        collection.each do |model|
+          model.run_callbacks :fetch
+        end
+        collection
       end
-      collection
+    end
+
+    def self.options_to_params(options={})
+      params = {
+        force: false
+      }
+      params[:force] = options[:force] if options[:force]
+      params[:include_assets] = options[:include_assets] if options[:include_assets]
+      params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
+
+      params
+    end
+
+    def self.cache_key(options={}, id=nil)
+      if id
+        "#{my_class}:find:#{id}:#{options.to_s}"
+      else
+        "#{my_class}:all:#{options.to_s}"
+      end
+    end
+
+    def self.cache_time(options={})
+      cache_sym = self.name.split('::').last.downcase.to_sym
+      OasConfig.configuration.cache_config[cache_sym] || 10.minutes
     end
 
     def update_attributes(attrs={})
