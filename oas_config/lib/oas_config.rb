@@ -26,6 +26,8 @@ module OasConfig
   class Configuration
     attr_accessor :endpoint_url,
                   :log_requests,
-                  :timeout
+                  :timeout,
+                  :authorization_header,
+                  :faraday_middleware
   end
 end
