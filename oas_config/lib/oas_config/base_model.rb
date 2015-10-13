@@ -65,6 +65,7 @@ module OasConfig
       params[:include_assets] = options[:include_assets] if options[:include_assets]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:include_gulp_config] = options[:include_gulp_config] if options[:include_gulp_config]
+      params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
 
       params
     end
