@@ -9,7 +9,7 @@ require "oas_config/version"
 require "oas_config/utilities"
 require "oas_config/validations"
 require "oas_config/middleware"
-require "oas_config/collections"
+require "oas_config/collection"
 require "oas_config/base_model"
 require "oas_config/account"
 
