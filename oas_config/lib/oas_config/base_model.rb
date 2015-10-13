@@ -25,7 +25,8 @@ module OasConfig
 
     def self.find(id, options={})
       params = self.options_to_params options
-      Rails.cache.fetch self.cache_key(params, id), expires_in: self.cache_time(params), force: params[:force] do
+      cache_options = self.cache_params options
+      Rails.cache.fetch self.cache_key(cache_options, id), expires_in: self.cache_time(params), force: params[:force] do
         config = OasConfig.configuration
         connection = OasConfig::Utilities.api_connection(config, my_class)
 
@@ -43,7 +44,8 @@ module OasConfig
 
     def self.all(options={}, &block)
       params = self.options_to_params options
-      Rails.cache.fetch self.cache_key(params), expires_in: self.cache_time(params), force: params[:force] do
+      cache_options = self.cache_params options
+      Rails.cache.fetch self.cache_key(cache_options), expires_in: self.cache_time(params), force: params[:force] do
         config = OasConfig.configuration
         connection = OasConfig::Utilities.api_connection(config, my_class)
 
@@ -65,6 +67,15 @@ module OasConfig
       params[:include_assets] = options[:include_assets] if options[:include_assets]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:include_gulp_config] = options[:include_gulp_config] if options[:include_gulp_config]
+      params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
+
+      params
+    end
+
+    def self.cache_params(options={})
+      params={}
+      params[:include_assets] = options[:include_assets] if options[:include_assets]
+      params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
 
       params
