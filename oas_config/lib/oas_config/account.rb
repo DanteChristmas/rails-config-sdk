@@ -7,7 +7,7 @@ module OasConfig
     def self.find(id, options={})
       @result = super id, options
       if options[:include_gulp_config]
-        gulp_json = @result.assets.map {|a| "#{a.component_name}/#{a.version}/#{a.file_name}"}
+        gulp_json = @result.assets.map {|a| "#{a[:component_name]}/#{a[:version]}/#{a[:file_name]}"}
         OasConfig::Utilities.write_json(gulp_json.to_json, OasConfig.configuration.gulp_config_path, 'oasAssets.json')
       end
 
