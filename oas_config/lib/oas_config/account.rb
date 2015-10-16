@@ -8,7 +8,7 @@ module OasConfig
       @result = super id, options
       if options[:include_gulp_config]
         gulp_json = @result.assets.map {|a| "#{a[:component_name]}/#{a[:version]}/#{a[:file_name]}"}
-        OasConfig::Utilities.write_json(gulp_json.to_json, OasConfig.configuration.gulp_config_path, 'oasAssets.json')
+        OasConfig::Utilities.write_json(gulp_json.to_json, OasConfig.configuration.gulp_config_path, 'asset-config.json')
       end
 
       @result
@@ -18,6 +18,7 @@ module OasConfig
       params = {
         search_by_org_code: true,
         include_assets: true,
+        include_amp_config: true,
         org_code: OasConfig.configuration.organization_code
       }
       params[:force] = options[:force] if options[:force]

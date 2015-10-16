@@ -65,6 +65,7 @@ module OasConfig
       }
       params[:force] = options[:force] if options[:force]
       params[:include_assets] = options[:include_assets] if options[:include_assets]
+      params[:include_amp_config] = options[:include_amp_config] if options[:include_amp_config]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:include_gulp_config] = options[:include_gulp_config] if options[:include_gulp_config]
       params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
@@ -75,6 +76,7 @@ module OasConfig
     def self.cache_params(options={})
       params={}
       params[:include_assets] = options[:include_assets] if options[:include_assets]
+      params[:include_amp_config] = options[:include_amp_config] if options[:include_amp_config]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
 
