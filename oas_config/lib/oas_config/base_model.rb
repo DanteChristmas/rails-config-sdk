@@ -69,6 +69,7 @@ module OasConfig
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:include_gulp_config] = options[:include_gulp_config] if options[:include_gulp_config]
       params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
+      params[:include_feature_toggles] = options[:include_feature_toggles] if options[:include_feature_toggles]
 
       params
     end
@@ -79,6 +80,7 @@ module OasConfig
       params[:include_amp_config] = options[:include_amp_config] if options[:include_amp_config]
       params[:include_accounts] = options[:include_accounts] if options[:include_accounts]
       params[:search_by_org_code] = options[:search_by_org_code] if options[:search_by_org_code]
+      params[:include_feature_toggles] = options[:include_feature_toggles] if options[:include_feature_toggles]
 
       params
     end

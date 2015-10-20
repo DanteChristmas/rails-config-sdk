@@ -19,6 +19,7 @@ module OasConfig
         search_by_org_code: true,
         include_assets: true,
         include_amp_config: true,
+        include_feature_toggles: true,
         org_code: OasConfig.configuration.organization_code
       }
       params[:force] = options[:force] if options[:force]
